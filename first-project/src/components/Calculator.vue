@@ -5,14 +5,12 @@
         type="number"
         v-model.number="op1"
         class="input"
-        v.el:inputOp1
         @focus="checkedOp = 'op1'"
       />
       <input
         type="number"
         v-model.number="op2"
         class="input"
-        v.el:inputOp2
         @focus="checkedOp = 'op2'"
       />
       <span>= {{ result }}</span>
@@ -64,7 +62,6 @@ export default {
       checkedOp: "",
       result: 0,
       error: "",
-      show: false,
       operands: ["+", "-", "/", "*", "x^y", "%"],
       keyboard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "&larr;"],
       checked: false,
