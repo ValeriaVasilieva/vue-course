@@ -11,6 +11,7 @@
       <button @click="calculate('*')" class="btn">*</button>
       <button @click="calculate('x')" class="btn">x <sup>y</sup></button>
       <button @click="calculate('//')" class="btn">/ нацело</button>
+      <p class="error">{{ error }}</p>
       <p>={{ result }}</p>
     </div>
   </div>
@@ -24,23 +25,31 @@ export default {
       op1: 0,
       op2: 0,
       result: 0,
+      error: "",
     };
   },
   methods: {
     calculate(action) {
+      this.error = "";
       switch (action) {
         case "+":
           return this.getSum();
         case "-":
           return this.getDiff();
         case "/":
-          return this.getDiv();
+          if (this.validate()) {
+            return this.getDiv();
+          }
+          break;
         case "*":
           return this.getMulti();
         case "x":
           return this.getPow();
         case "//":
-          return this.getIntDiv();
+          if (this.validate()) {
+            return this.getIntDiv();
+          }
+          break;
       }
     },
     getSum() {
@@ -61,6 +70,12 @@ export default {
     getIntDiv() {
       return (this.result = parseInt(this.op1 / this.op2));
     },
+    validate() {
+      if (this.op2 === 0) {
+        this.error = "Нельзя делить на ноль";
+        return false;
+      } else return true;
+    },
   },
 };
 </script>
@@ -71,5 +86,8 @@ export default {
   height: 40px;
   margin: 10px;
   padding: 5px;
+}
+.error {
+  color: red;
 }
 </style>
