@@ -2,12 +2,14 @@
   <div>
     <div class="display">
       <input
+        name="op1"
         type="number"
         v-model.number="op1"
         class="input"
         @focus="checkedOp = 'op1'"
       />
       <input
+        name="op2"
         type="number"
         v-model.number="op2"
         class="input"
@@ -21,13 +23,14 @@
         :key="idx"
         @click="calculate(operand)"
         class="btn"
+        :name="operand"
       >
         {{ operand }}
       </button>
     </div>
     <p class="error">{{ error }}</p>
     <label>
-      <input type="checkbox" v-model="checked" />
+      <input type="checkbox" v-model="checked" name="checkbox" />
       Отобразить экранную клавиатуру
     </label>
     <div class="keyboard" v-show="checked">
@@ -37,14 +40,27 @@
         v-html="number"
         @click="setValue"
         class="btn"
+        :name="number"
       ></button>
       <div>
         <label>
-          <input type="radio" name="operand" value="op1" v-model="checkedOp" />
+          <input
+            type="radio"
+            name="operand"
+            value="op1"
+            v-model="checkedOp"
+            data-name="radio1"
+          />
           Первый операнд
         </label>
         <label>
-          <input type="radio" name="operand" value="op2" v-model="checkedOp" />
+          <input
+            type="radio"
+            name="operand"
+            value="op2"
+            v-model="checkedOp"
+            data-name="radio2"
+          />
           Второй операнд
         </label>
       </div>
